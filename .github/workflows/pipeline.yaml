@@ -24,7 +24,6 @@ jobs:
           path: resources
           key: hugo-resources-${{ github.sha }}
           restore-keys: |
-            hugo-resources-
             hugo-resources
 
       - name: Cache hugo deb
@@ -44,6 +43,10 @@ jobs:
 
       - name: Build
         run: hugo --minify
+
+      - name: Enforce cache update for a local NX cache
+        run: |
+          echo "STATE_CACHE_KEY=${hugo-resources}" >> $GITHUB_ENV
 
       - name: Deploy
         if: github.ref == 'refs/heads/main'
