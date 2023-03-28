@@ -22,8 +22,10 @@ jobs:
         uses: actions/cache@v3
         with:
           path: resources
-          key: hugo-resources
-          restore-keys: hugo-resources
+          key: hugo-resources-${{ github.sha }}
+          restore-keys: |
+            hugo-resources-
+            hugo-resources
 
       - name: Cache hugo deb
         uses: actions/cache@v3
